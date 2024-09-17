@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models
 from datetime import date, datetime, timedelta
+from odoo.exceptions import UserError
 
 
 class EstateProperty(models.Model):
@@ -35,3 +36,23 @@ class EstateProperty(models.Model):
                 record.validity = (record.date_deadline - record.create_date.date()).days
             else:
                 record.validity = (record.date_deadline - date.today().date()).days
+
+    def accept_offer(self):
+        for record in self:
+            if not record.status:
+                record.status = "accepted"
+                record.property_id.selling_price = record.price
+                record.property_id.buyer = record.partner_id
+            
+        offers = self.env['estate.property.offer'].search([])
+        for offer in offers:
+            if not offer.status:
+                offer.status = "refused"
+        return True
+
+    def refuse_offer(self):
+        for record in self:
+            print(record.status)
+            if not record.status:
+                record.status = "refused"
+        return True
