@@ -31,10 +31,13 @@
                             <field name="property_type_id"/>
                         </group>
                         <group>
+                            <field name="expected_price"/>
+                        </group>
+                        <group>
                             <field name="postcode"/>
                         </group>
                         <group>
-                            <field name="expected_price"/>
+                            <field name="best_price" string="Best Offer"/>
                         </group>
                         <group>
                             <field name="date_availability" string="Available From"/>
@@ -70,7 +73,12 @@
                                 <field name="garden_orientation"/>
                             </group>
                             <group>
-                                <field name="state"/>
+                                <field name="total_area" string="Total Area (sqm)"/>
+                            </group>
+                        </page>
+                        <page string="Offers">
+                            <group>
+                                <field name="offer_ids"/>
                             </group>
                         </page>
                         <page string="Other Info">
