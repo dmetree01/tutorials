@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import UserError
-
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -80,3 +80,19 @@ class EstateProperty(models.Model):
                 raise UserError('cancelled properties cannot be sold')
             record.state = "sold"
         return True
+
+    _sql_constraints = [
+        ('check_expected_price', 'CHECK(expected_price > 0)',
+         'Expected price of the property should be greater than 0'),
+         ('check_selling_price', 'CHECK(selling_price > 0)',
+         'Selling price of the property should be greater than 0')
+    ]
+
+    @api.constrains('selling_price', 'expected_price')
+    def check_selling_price(self):
+        for record in self:
+            if record.selling_price == 0:
+                return True
+            print("check_selling_price", (record.selling_price / record.expected_price))
+            if (record.selling_price / record.expected_price) < 0.9:
+                raise ValidationError(_('The selling price cannot be lower than 90 percent of the expected price: \n Selling price: %s, Expected price: %s') % (record.selling_price, record.expected_price))

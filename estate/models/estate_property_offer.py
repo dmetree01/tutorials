@@ -56,3 +56,8 @@ class EstateProperty(models.Model):
             if not record.status:
                 record.status = "refused"
         return True
+
+    _sql_constraints = [
+        ('check_price', 'CHECK(price > 0)',
+         'Offer price of the property should be greater than 0')
+    ]
