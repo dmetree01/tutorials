@@ -17,13 +17,14 @@
         <field name="model">estate.property.type</field>
         <field name="arch" type="xml">
             <form string="My property type">
-                <header>
-                    
-                </header>
                 <sheet>
                     <h1>
                         <field name="name"/>
                     </h1>
+                    <group>
+                        <field name="offer_ids"/>
+                        <field name="offer_count"/>
+                    </group>
                     <notebook>
                         <page string="Properties">
                             <field name="property_ids">
