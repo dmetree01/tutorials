@@ -63,3 +63,8 @@ class EstateProperty(models.Model):
         ('check_price', 'CHECK(price > 0)',
          'Offer price of the property should be greater than 0')
     ]
+
+    @api.model
+    def create(self, vals):
+        self.env['estate.property'].browse(vals['property_id']).state = 'offer_received'
+        return super().create(vals)

@@ -97,3 +97,8 @@ class EstateProperty(models.Model):
             print("check_selling_price", (record.selling_price / record.expected_price))
             if (record.selling_price / record.expected_price) < 0.9:
                 raise ValidationError(_('The selling price cannot be lower than 90 percent of the expected price: \n Selling price: %s, Expected price: %s') % (record.selling_price, record.expected_price))
+            
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_active_offer(self):
+        if any(property.state not in ('new', 'canceled') for property in self):
+            raise UserError("Can't delete an active property!")
