@@ -3,12 +3,12 @@
 
 from odoo import api, fields, models
 from datetime import date, datetime, timedelta
-from odoo.exceptions import UserError
 
 
 class EstateProperty(models.Model):
     _name = "estate.property.offer"
     _description = "Estate Property Offer"
+    _order = "price desc"
 
     price = fields.Float()
     status = fields.Selection(
@@ -19,6 +19,7 @@ class EstateProperty(models.Model):
     )
     partner_id = fields.Many2one('res.partner', string='Partner', required=True)
     property_id = fields.Many2one('estate.property', string='Property', required=True)
+    property_type_id = fields.Many2one("estate.property.type", string="Property Type", related="property_id.property_type_id", store=True)
     validity = fields.Integer(default=7)
     date_deadline = fields.Date(compute="_compute_date_deadline", inverse="_inverse_date_deadline", store=True)
 
@@ -41,6 +42,7 @@ class EstateProperty(models.Model):
         for record in self:
             if not record.status:
                 record.status = "accepted"
+                record.property_id.state = "offer_accepted"
                 record.property_id.selling_price = record.price
                 record.property_id.buyer = record.partner_id
             

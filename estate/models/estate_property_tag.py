@@ -8,8 +8,10 @@ from dateutil.relativedelta import relativedelta
 class EstatePropertyTag(models.Model):
     _name = "estate.property.tag"
     _description = "Estate Property Tag"
+    _order = "name"
 
     name = fields.Char(required=True)
+    color = fields.Integer()
     
     _sql_constraints = [
         ('check_name', 'unique(name)',
