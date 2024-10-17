@@ -2,8 +2,14 @@
 <templates xml:space="preserve">
 
     <t t-name="owl_playground.playground" owl="1">
-        <div class="p-3">
-            hello world
+        <div>
+            <Counter/>
+        </div>
+        <div>
+            <Counter/>
+        </div>
+        <div>
+            <Todos todos="todos"/>
         </div>
     </t>
 
