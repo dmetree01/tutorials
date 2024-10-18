@@ -2,7 +2,11 @@
 <templates xml:space="preserve">
 
     <t t-name="owl_playground.todo" owl="1">
-        <p t-att-class="{'text-muted text-decoration-line-through': props.todo.done === true}"><t t-esc="props.todo.id"/>. <t t-esc="props.todo.description"/></p>
+        <p t-att-class="{'text-muted text-decoration-line-through': props.todo.done === true}">
+            <input type="checkbox" t-att-checked="props.todo.done" t-on-click="props.toggleState" t-att-value="props.todo.id"/>
+            <span style="padding-left:10px;"><t t-esc="props.todo.id"/>. <t t-esc="props.todo.description"/></span>
+            <span class="fa fa-remove" t-on-click="props.removeTodo" t-att-data-id="props.todo.id" style="color:red;margin-left:10px;cursor:pointer;"/>
+        </p>
     </t>
 
 </templates>

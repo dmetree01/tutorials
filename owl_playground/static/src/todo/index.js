@@ -6,10 +6,5 @@ export const todoPropShape = {type: Object, shape: {id: Number, description: Str
 
 export class Todo extends Component {
     static template = "owl_playground.todo";
-    static props = { todo: todoPropShape };
-
-    constructor(parent) {
-        super(parent);
-        console.log(parent)
-    }
+    static props = { todo: todoPropShape, toggleState: Function, removeTodo: Function };
 }

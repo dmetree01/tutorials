@@ -2,14 +2,20 @@
 <templates xml:space="preserve">
 
     <t t-name="owl_playground.playground" owl="1">
-        <div>
-            <Counter/>
-        </div>
-        <div>
-            <Counter/>
-        </div>
-        <div>
-            <Todos todos="todos"/>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="width: 300px">
+                <div>
+                    <Counter/>
+                </div>
+                <br/>
+                <div>
+                    <Counter/>
+                </div>
+                <br/>
+                <div>
+                    <TodoList todos="todos"/>
+                </div>
+            </div>
         </div>
     </t>
 
