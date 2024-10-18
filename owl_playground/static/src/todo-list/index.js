@@ -1,7 +1,8 @@
 /** @odoo-module **/
 
-import { Component, useState, useRef, onMounted } from "@odoo/owl";
+import { Component, useState } from "@odoo/owl";
 import { todoPropShape, Todo } from "../todo";
+import { useAutofocus } from '../utils';
 
 export class TodoList extends Component {
     static template = "owl_playground.todo-list";
@@ -9,16 +10,9 @@ export class TodoList extends Component {
     static props = { todos: {type: Array, element: todoPropShape} };
     
     todos = useState(this.props.todos)
-    inputRef = useRef("todoInput");
 
     setup() {
-        onMounted(() => {
-            this.focusInput()
-        })
-    }
-
-    focusInput() {
-        this.inputRef.el.focus();
+        useAutofocus("todoInput");
     }
 
     toggleState(e) {
