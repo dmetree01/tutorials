@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { Component, useState } from "@odoo/owl";
-import { todoPropShape, Todo } from "../todo";
+import { todoPropShape, Todo } from "./todo";
 import { useAutofocus } from '../utils';
 
 export class TodoList extends Component {

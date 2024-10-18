@@ -8,9 +8,11 @@
                     <Counter/>
                 </div>
                 <br/>
-                <div>
-                    <Counter/>
-                </div>
+                <Card>
+                    <t t-set-slot="title">Card title1</t>
+                    <p class="card-text">Some quick example text...</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </Card>
                 <br/>
                 <div>
                     <TodoList todos="todos"/>
